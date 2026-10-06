@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>7-sinf Fizika — II chorak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#141829; --bg-2:#1c2138; --panel:#1f253f; --panel-2:#262d4c;
+  --ink:#EDE8DC; --dim:#B9B6C8; --line:#363c5c;
+  --amber:#F2A93B; --teal:#59D6C4; --teal-deep:#2F9E8F; --danger:#E8735F;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box}
+body{margin:0;min-height:100%;background:var(--bg);
+  background-image:radial-gradient(circle at 10% 0%,rgba(89,214,196,.08),transparent 40%),radial-gradient(circle at 90% 10%,rgba(242,169,59,.1),transparent 45%);
+  color:var(--ink);font-family:'Manrope',sans-serif;line-height:1.6}
+h1,h2{font-family:'Fraunces',serif;font-weight:600;margin:0 0 .4em;color:#FBF7EE}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px 80px}
+.hero{padding:48px 20px 36px;border-bottom:1px solid var(--line)}
+.hero .kicker{color:var(--teal);font-family:'Fraunces',serif;font-style:italic;margin-bottom:8px}
+.hero h1{font-size:clamp(1.8rem,6vw,2.6rem)}
+.hero p{color:var(--dim);max-width:46ch}
+section{padding:38px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:none}
+.num{font-family:'Fraunces',serif;font-style:italic;color:var(--dim);font-size:.9rem;margin-bottom:4px}
+section h2{font-size:clamp(1.25rem,4vw,1.6rem)}
+.lead{color:var(--dim);max-width:62ch;font-size:.98rem}
+.term{background:rgba(242,169,59,.14);border-bottom:2px solid var(--amber);color:#FBF7EE;padding:0 3px;border-radius:3px;font-weight:600}
+.term.c{background:rgba(89,214,196,.14);border-bottom:2px solid var(--teal)}
+.example-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0 4px}
+.example{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:.88rem;color:var(--dim)}
+.example strong{color:var(--ink);display:block;font-size:.9rem;margin-bottom:2px}
+.sim{margin-top:18px;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.sim-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--panel-2);font-size:.82rem;color:var(--dim)}
+.sim-head strong{color:var(--ink);font-size:.88rem}
+.sim-body{padding:16px}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chip{font-family:'Manrope',sans-serif;font-weight:600;font-size:.82rem;padding:8px 13px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--dim);cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--teal);color:var(--ink)}
+.chip.active{background:var(--teal);border-color:var(--teal);color:#04211d}
+.detail{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:.92rem;color:var(--dim);min-height:60px}
+.detail b{color:#FBF7EE}
+canvas{display:block;width:100%;height:auto;background:var(--bg-2);border-radius:10px;touch-action:none}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.calc-field label{display:block;font-size:.8rem;color:var(--dim);margin-bottom:6px}
+.calc-field input[type=range]{width:100%;accent-color:var(--amber)}
+.calc-field .val{font-weight:700;color:var(--amber)}
+.calc-result{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-size:1rem;text-align:center;margin-bottom:12px}
+.calc-result .f{font-family:'Fraunces',serif;font-size:1.15rem;color:var(--teal)}
+.graph-wrap{position:relative}
+.graph-hint{font-size:.78rem;color:var(--dim);margin-top:6px;text-align:center}
+.tz-reset{margin-top:8px}
+.quiz-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.quiz-card p.q{font-weight:700;color:#FBF7EE;margin:0 0 8px;font-size:.92rem}
+.opt{display:block;width:100%;text-align:left;background:var(--bg-2);border:1px solid var(--line);color:var(--ink);padding:8px 12px;border-radius:7px;margin-bottom:6px;cursor:pointer;font-size:.86rem}
+.opt:hover{border-color:var(--teal)}
+.opt.correct{background:rgba(89,214,196,.18);border-color:var(--teal)}
+.opt.wrong{background:rgba(232,115,95,.16);border-color:var(--danger)}
+footer{text-align:center;color:var(--dim);font-size:.82rem;padding:36px 20px 10px}
+</style>
+</head>
+<body>
+<div class="hero"><div class="wrap" style="padding:0">
+  <div class="kicker">7-sinf · Fizika · II chorak</div>
+  <h1>O'lchash va harakat dunyosi</h1>
+  <p>Hajm, massa va vaqtdan boshlab, jismlarning harakati va tezligigacha — 7 ta mavzu, har biri jonli misol va interaktiv mashq bilan.</p>
+</div></div>
+<div class="wrap">
+
+<section><div class="num">1-mavzu</div><h2>Hajmni qanday o'lchaymiz?</h2>
+<p class="lead"><span class="term c">Hajm</span> jismning fazoda egallagan o'rni. Suyuqliklar hajmi menzurkada, noto'g'ri shakldagi jismlar esa suv siljishi usulida o'lchanadi.</p>
+<div class="example-row">
+  <div class="example"><strong>Menzurka</strong>Suyuqlik hajmini to'g'ridan-to'g'ri o'qish</div>
+  <div class="example"><strong>Siljish usuli</strong>Toshni suvga solib, suv ko'tarilishini o'lchash</div>
+</div>
+<div class="sim"><div class="sim-head"><strong>Siljish usuli</strong><span>Jismni slayder bilan "botiring"</span></div><div class="sim-body">
+<canvas id="volCanvas" width="640" height="220"></canvas>
+<input type="range" id="volSlider" min="0" max="100" value="0" style="width:100%;margin-top:10px;accent-color:var(--amber)">
+<div class="graph-hint">Jism hajmi qancha katta bo'lsa, suv shuncha ko'p ko'tariladi</div>
+</div></div></section>
+
+<section><div class="num">2-mavzu</div><h2>Massani qanday o'lchaymiz?</h2>
+<p class="lead"><span class="term c">Massa</span> jismdagi modda miqdorini bildiradi va <span class="term">tarozi</span>da kilogrammda (kg) o'lchanadi.</p>
+<div class="sim"><div class="sim-head"><strong>Virtual tarozi</strong><span>Yukni sudrab tortib ko'ring</span></div><div class="sim-body">
+<canvas id="scaleCanvas" width="640" height="220"></canvas>
+<input type="range" id="massSlider" min="0" max="10" value="3" step="0.5" style="width:100%;margin-top:10px;accent-color:var(--amber)">
+</div></div></section>
+
+<section><div class="num">3-mavzu</div><h2>Vaqtni qanday o'lchaymiz?</h2>
+<p class="lead"><span class="term c">Vaqt</span> sekundda (s) o'lchanadi. Stopwatch tugmasini bosib, vaqt o'tishini kuzating.</p>
+<div class="sim"><div class="sim-head"><strong>Stopwatch</strong><span id="swStatus">To'xtatilgan</span></div><div class="sim-body">
+<div class="calc-result"><span class="f" id="swOut">00:00.0</span></div>
+<div class="chip-row"><button class="chip active" id="swStart">Start</button><button class="chip" id="swStop">Stop</button><button class="chip" id="swReset">Reset</button></div>
+</div></div></section>
+
+<section><div class="num">4-mavzu</div><h2>Jismlarning mexanik harakati</h2>
+<p class="lead"><span class="term">Mexanik harakat</span> — jismning fazodagi o'rni vaqt o'tishi bilan o'zgarishi. Harakat to'g'ri chiziqli yoki egri chiziqli bo'lishi mumkin.</p>
+<div class="sim"><div class="sim-head"><strong>Harakat turlari</strong><span>Rejimni tanlang</span></div><div class="sim-body">
+<div class="chip-row"><button class="chip active" data-mode="line">To'g'ri chiziqli</button><button class="chip" data-mode="curve">Egri chiziqli</button></div>
+<canvas id="motionCanvas" width="640" height="200"></canvas>
+</div></div></section>
+
+<section><div class="num">5-mavzu</div><h2>Tezlik</h2>
+<p class="lead"><span class="term">Tezlik</span> — jism birlik vaqtda bosib o'tgan yo'li: <span class="term">V = S / t</span>.</p>
+<div class="sim"><div class="sim-head"><strong>Tezlik kalkulyatori</strong><span>V = S / t</span></div><div class="sim-body">
+<div class="calc-grid">
+  <div class="calc-field"><label>Masofa, S = <span class="val" id="sVal">60</span> m</label><input type="range" id="sSlider" min="10" max="200" value="60"></div>
+  <div class="calc-field"><label>Vaqt, t = <span class="val" id="tVal">10</span> s</label><input type="range" id="tSlider" min="2" max="40" value="10"></div>
+</div>
+<div class="calc-result"><span class="f">V = S / t = <span id="vResult">6.0</span> m/s</span></div>
+<canvas id="speedCanvas" width="640" height="120"></canvas>
+</div></div></section>
+
+<section><div class="num">6-mavzu</div><h2>Tezlikni o'lchash</h2>
+<p class="lead">Amaliy masala orqali tezlik hisoblashni mashq qilaylik.</p>
+<div class="sim"><div class="sim-head"><strong>Masala</strong><span>Yechib ko'ring</span></div><div class="sim-body">
+<div class="detail">Mashina 150 km masofani 2 soatda bosib o'tdi. Tezligini toping.<br><br>
+<b>Yechim:</b> V = S/t = 150 km / 2 soat = <b style="color:var(--teal)">75 km/soat</b></div>
+</div></div></section>
+
+<section><div class="num">7-mavzu</div><h2>Yo'l va tezlik grafiklari</h2>
+<p class="lead">Grafikdagi nuqtalarni bosib, jismning vaqt davomida bosib o'tgan yo'lini chizing.</p>
+<div class="sim"><div class="sim-head"><strong>Interaktiv grafik</strong><span>Katakni bosing</span></div><div class="sim-body">
+<canvas id="graphCanvas" width="640" height="320"></canvas>
+<div class="chip-row tz-reset"><button class="chip" id="graphReset">Grafikni tozalash</button></div>
+</div></div></section>
+
+<section><div class="num">Umumiy tekshiruv</div><h2>5 ta savol</h2>
+<div class="quiz-card"><p class="q">1. Hajmni o'lchash uchun qaysi asbob ishlatiladi?</p>
+<button class="opt" data-c="false">Dinamometr</button><button class="opt" data-c="true">Menzurka</button><button class="opt" data-c="false">Termometr</button></div>
+<div class="quiz-card"><p class="q">2. Massa birligi nima?</p>
+<button class="opt" data-c="true">Kilogramm</button><button class="opt" data-c="false">Metr</button><button class="opt" data-c="false">Nyuton</button></div>
+<div class="quiz-card"><p class="q">3. Mexanik harakat deganda nima tushuniladi?</p>
+<button class="opt" data-c="true">Jism o'rnining vaqt bilan o'zgarishi</button><button class="opt" data-c="false">Jismning rangi o'zgarishi</button><button class="opt" data-c="false">Jismning massasi o'zgarishi</button></div>
+<div class="quiz-card"><p class="q">4. V = S/t formulasida V nimani bildiradi?</p>
+<button class="opt" data-c="false">Vaqtni</button><button class="opt" data-c="true">Tezlikni</button><button class="opt" data-c="false">Hajmni</button></div>
+<div class="quiz-card"><p class="q">5. Yo'l-vaqt grafigida chiziq qancha tik bo'lsa, tezlik qanday bo'ladi?</p>
+<button class="opt" data-c="true">Kattaroq</button><button class="opt" data-c="false">Kichikroq</button><button class="opt" data-c="false">O'zgarmaydi</button></div>
+</section>
+
+</div>
+<footer>7-sinf fizika · II chorak — Taqvim-mavzu reja asosida</footer>
+
+<script>
+// 1. Volume displacement
+const volCanvas = document.getElementById('volCanvas'), vctx = volCanvas.getContext('2d');
+const volSlider = document.getElementById('volSlider');
+function drawVol(){
+  const w=volCanvas.width,h=volCanvas.height; vctx.clearRect(0,0,w,h);
+  const v = parseInt(volSlider.value,10);
+  const baseLevel = h-60, riseAmount = (v/100)*90;
+  const waterY = baseLevel - riseAmount;
+  vctx.strokeStyle='#363c5c'; vctx.lineWidth=2;
+  vctx.strokeRect(w/2-80, 30, 160, h-60);
+  vctx.fillStyle='rgba(89,214,196,0.35)';
+  vctx.fillRect(w/2-78, waterY, 156, (h-60-30)-(waterY-30));
+  if(v>0){
+    const objSize = 20+ v*0.25;
+    vctx.fillStyle='#F2A93B';
+    vctx.beginPath(); vctx.arc(w/2, waterY+objSize/2+4, objSize/2, 0, Math.PI*2); vctx.fill();
+  }
+  vctx.fillStyle='#B9B6C8'; vctx.font='12px Manrope';
+  vctx.fillText('Suv sathi: '+Math.round(waterY), w/2-40, 20);
+}
+volSlider.addEventListener('input', drawVol); drawVol();
+
+// 2. Scale
+const scaleCanvas = document.getElementById('scaleCanvas'), sctx2 = scaleCanvas.getContext('2d');
+const massSlider = document.getElementById('massSlider');
+function drawScale(){
+  const w=scaleCanvas.width,h=scaleCanvas.height; sctx2.clearRect(0,0,w,h);
+  const m = parseFloat(massSlider.value);
+  const tilt = Math.max(-18, Math.min(18, (5-m)*4));
+  const cx=w/2, cy=90;
+  sctx2.strokeStyle='#B9B6C8'; sctx2.lineWidth=3;
+  sctx2.beginPath(); sctx2.moveTo(cx,cy); sctx2.lineTo(cx,cy+70); sctx2.stroke();
+  sctx2.save(); sctx2.translate(cx,cy); sctx2.rotate(tilt*Math.PI/180);
+  sctx2.beginPath(); sctx2.moveTo(-110,0); sctx2.lineTo(110,0); sctx2.stroke();
+  sctx2.strokeStyle='#363c5c';
+  sctx2.beginPath(); sctx2.moveTo(-110,0); sctx2.lineTo(-110,40); sctx2.moveTo(110,0); sctx2.lineTo(110,40); sctx2.stroke();
+  sctx2.fillStyle='rgba(89,214,196,0.3)'; sctx2.fillRect(-130,40,40,24);
+  sctx2.fillStyle='#F2A93B'; sctx2.fillRect(90,40,40,24*Math.min(1,m/10)+4);
+  sctx2.restore();
+  sctx2.fillStyle='#EDE8DC'; sctx2.font='13px Manrope'; sctx2.textAlign='center';
+  sctx2.fillText(m.toFixed(1)+' kg', cx, 180);
+  sctx2.textAlign='left';
+}
+massSlider.addEventListener('input', drawScale); drawScale();
+
+// 3. Stopwatch
+let swInterval=null, swMs=0;
+const swOut=document.getElementById('swOut'), swStatus=document.getElementById('swStatus');
+function fmt(ms){ const s=Math.floor(ms/1000), d=Math.floor((ms%1000)/100); const mm=String(Math.floor(s/60)).padStart(2,'0'); const ss=String(s%60).padStart(2,'0'); return mm+':'+ss+'.'+d; }
+document.getElementById('swStart').onclick=()=>{ if(swInterval) return; swStatus.textContent='Ishlamoqda'; const t0=Date.now()-swMs; swInterval=setInterval(()=>{ swMs=Date.now()-t0; swOut.textContent=fmt(swMs); },100); };
+document.getElementById('swStop').onclick=()=>{ clearInterval(swInterval); swInterval=null; swStatus.textContent='To\'xtatilgan'; };
+document.getElementById('swReset').onclick=()=>{ clearInterval(swInterval); swInterval=null; swMs=0; swOut.textContent='00:00.0'; swStatus.textContent='To\'xtatilgan'; };
+
+// 4. Motion types
+const motionCanvas = document.getElementById('motionCanvas'), mctx = motionCanvas.getContext('2d');
+let motionMode='line', mt=0;
+document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{ document.querySelectorAll('[data-mode]').forEach(x=>x.classList.remove('active')); b.classList.add('active'); motionMode=b.dataset.mode; mt=0; });
+function drawMotion(){
+  const w=motionCanvas.width,h=motionCanvas.height; mctx.clearRect(0,0,w,h);
+  mt+=0.02;
+  if(motionMode==='line'){
+    mctx.strokeStyle='#363c5c'; mctx.beginPath(); mctx.moveTo(40,h/2); mctx.lineTo(w-40,h/2); mctx.stroke();
+    const x = 40 + ((mt*80)%(w-80));
+    mctx.fillStyle='#F2A93B'; mctx.beginPath(); mctx.arc(x,h/2,10,0,Math.PI*2); mctx.fill();
+  } else {
+    mctx.strokeStyle='#363c5c'; mctx.beginPath(); mctx.arc(w/2,h/2,80,0,Math.PI*2); mctx.stroke();
+    const ang = mt*1.5;
+    const x = w/2+Math.cos(ang)*80, y=h/2+Math.sin(ang)*80;
+    mctx.fillStyle='#59D6C4'; mctx.beginPath(); mctx.arc(x,y,10,0,Math.PI*2); mctx.fill();
+  }
+  requestAnimationFrame(drawMotion);
+}
+drawMotion();
+
+// 5. Speed calculator
+const sSlider=document.getElementById('sSlider'), tSlider=document.getElementById('tSlider'), sVal=document.getElementById('sVal'), tVal=document.getElementById('tVal'), vResult=document.getElementById('vResult');
+const speedCanvas=document.getElementById('speedCanvas'), spctx=speedCanvas.getContext('2d'); let runX=0;
+function updateCalc(){ const S=parseInt(sSlider.value,10), t=parseInt(tSlider.value,10); sVal.textContent=S; tVal.textContent=t; vResult.textContent=(S/t).toFixed(1); }
+sSlider.oninput=updateCalc; tSlider.oninput=updateCalc; updateCalc();
+function drawSpeed(){
+  const w=speedCanvas.width,h=speedCanvas.height; spctx.clearRect(0,0,w,h);
+  const y=h/2+10; spctx.strokeStyle='#363c5c'; spctx.lineWidth=3; spctx.beginPath(); spctx.moveTo(30,y); spctx.lineTo(w-30,y); spctx.stroke();
+  const V=parseFloat(vResult.textContent); runX += 0.4+V*0.3; const len=w-60; if(runX>len) runX=0;
+  spctx.fillStyle='#F2A93B'; spctx.beginPath(); spctx.arc(30+runX,y-14,10,0,Math.PI*2); spctx.fill();
+  requestAnimationFrame(drawSpeed);
+}
+drawSpeed();
+
+// 7. Interactive graph
+const graphCanvas = document.getElementById('graphCanvas'), gctx = graphCanvas.getContext('2d');
+const gw=graphCanvas.width, gh=graphCanvas.height, pad=40;
+let gridCols=10, gridRows=8, pts=[];
+function drawGraph(){
+  gctx.clearRect(0,0,gw,gh);
+  gctx.strokeStyle='#363c5c'; gctx.lineWidth=1;
+  const cw=(gw-pad*2)/gridCols, ch=(gh-pad*2)/gridRows;
+  for(let i=0;i<=gridCols;i++){ gctx.beginPath(); gctx.moveTo(pad+i*cw,pad); gctx.lineTo(pad+i*cw,gh-pad); gctx.stroke(); }
+  for(let j=0;j<=gridRows;j++){ gctx.beginPath(); gctx.moveTo(pad,pad+j*ch); gctx.lineTo(gw-pad,pad+j*ch); gctx.stroke(); }
+  gctx.strokeStyle='#B9B6C8'; gctx.lineWidth=2;
+  gctx.beginPath(); gctx.moveTo(pad,gh-pad); gctx.lineTo(gw-pad,gh-pad); gctx.moveTo(pad,pad); gctx.lineTo(pad,gh-pad); gctx.stroke();
+  gctx.fillStyle='#B9B6C8'; gctx.font='12px Manrope'; gctx.fillText('vaqt (t)', gw-pad-40, gh-pad+20); gctx.save(); gctx.translate(14,pad+20); gctx.rotate(-Math.PI/2); gctx.fillText("yo'l (S)",0,0); gctx.restore();
+  if(pts.length>0){
+    gctx.strokeStyle='#59D6C4'; gctx.lineWidth=2; gctx.beginPath();
+    pts.forEach((p,i)=>{ if(i===0) gctx.moveTo(p.x,p.y); else gctx.lineTo(p.x,p.y); }); gctx.stroke();
+    pts.forEach(p=>{ gctx.fillStyle='#F2A93B'; gctx.beginPath(); gctx.arc(p.x,p.y,5,0,Math.PI*2); gctx.fill(); });
+  }
+}
+graphCanvas.addEventListener('click', e=>{
+  const rect = graphCanvas.getBoundingClientRect();
+  const scaleX = graphCanvas.width/rect.width, scaleY = graphCanvas.height/rect.height;
+  const x = (e.clientX-rect.left)*scaleX, y=(e.clientY-rect.top)*scaleY;
+  if(x<pad||x>gw-pad||y<pad||y>gh-pad) return;
+  pts.push({x,y}); pts.sort((a,b)=>a.x-b.x); drawGraph();
+});
+document.getElementById('graphReset').onclick=()=>{ pts=[]; drawGraph(); };
+drawGraph();
+
+// Quizzes
+document.querySelectorAll('.quiz-card').forEach(card=>{
+  const opts = card.querySelectorAll('.opt');
+  opts.forEach(opt=>{ opt.addEventListener('click', ()=>{ if(card.dataset.a) return; card.dataset.a='1';
+    opts.forEach(o=>{ if(o.dataset.c==='true') o.classList.add('correct'); else if(o===opt) o.classList.add('wrong'); }); }); });
+});
+</script>
+</body>
+</html>
